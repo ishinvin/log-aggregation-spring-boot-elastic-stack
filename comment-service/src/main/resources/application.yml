@@ -1,2 +1,13 @@
 server:
   port: ${PORT:8002}
+
+spring:
+  application:
+    name: comment-service
+  sleuth:
+    enabled: true
+    sampler:
+      probability: 1.0
+
+# traceID and spanId are predefined MDC keys - we want the logs to include them
+logging.pattern.level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
